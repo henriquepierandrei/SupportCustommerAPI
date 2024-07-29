@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.UUID;
 
 import java.util.Date;
 
@@ -15,11 +16,11 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SupportModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @UUID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String ticket;
+
 
     private String title;
 

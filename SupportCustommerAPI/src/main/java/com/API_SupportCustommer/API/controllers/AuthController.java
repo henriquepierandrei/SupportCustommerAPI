@@ -41,7 +41,7 @@ public class AuthController {
     public ResponseEntity register(@RequestBody RegisterDto registerDto){
         Optional<UserModel> userModel = userRepository.findByEmail(registerDto.email());
         if (userModel.isEmpty()){
-            
+
             UserModel newUser = new UserModel();
             newUser.setEmail(registerDto.email());
             newUser.setPassword(passwordEncoder.encode(registerDto.password()));
@@ -54,10 +54,5 @@ public class AuthController {
         return ResponseEntity.badRequest().build();
 
     }
-    @PostMapping("/a")
-    public ResponseEntity<String> aaa(){
-        System.out.println("aa");
-        return ResponseEntity.ok("aaa");
 
-    }
 }
