@@ -1,4 +1,4 @@
-package com.API_SupportCustommer.SupportCustommerAPI;
+package com.API_SupportCustommer.API;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.API_SupportCustommer.SupportCustommerAPI.infra.cors;
+package com.API_SupportCustommer.API.infra.cors;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
