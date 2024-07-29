@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70adc911-b0b6-46f8-9934-94f6b5d5ce7f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SupportCustommerAPI/src/main/java/com/API_SupportCustommer/API/model/SupportModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SupportCustommerAPI/src/main/java/com/API_SupportCustommer/API/model/UserModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SupportCustommerAPI/src/main/java/com/API_SupportCustommer/SupportCustommerAPI/SupportCustommerApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/SupportCustommerAPI/src/main/java/com/API_SupportCustommer/API/SupportCustommerApiApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SupportCustommerAPI/src/main/java/com/API_SupportCustommer/SupportCustommerAPI/infra/cors/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/SupportCustommerAPI/src/main/java/com/API_SupportCustommer/API/infra/cors/CorsConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SupportCustommerAPI/src/test/java/com/API_SupportCustommer/SupportCustommerAPI/SupportCustommerApiApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/SupportCustommerAPI/src/test/java/com/API_SupportCustommer/API/SupportCustommerApiApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SupportCustommerAPI/src/main/java/com/API_SupportCustommer/API/dto/SupportDto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +16,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
   </component>
