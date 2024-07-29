@@ -9,6 +9,7 @@ import com.API_SupportCustommer.API.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,7 +41,7 @@ public class AuthController {
     public ResponseEntity register(@RequestBody RegisterDto registerDto){
         Optional<UserModel> userModel = userRepository.findByEmail(registerDto.email());
         if (userModel.isEmpty()){
-            System.out.println("ISEMPTY");
+            
             UserModel newUser = new UserModel();
             newUser.setEmail(registerDto.email());
             newUser.setPassword(passwordEncoder.encode(registerDto.password()));
@@ -49,8 +50,14 @@ public class AuthController {
             String token = this.tokenService.generateToken(newUser);
             return ResponseEntity.ok(new ResponseDto(newUser.getUsername(), newUser.getEmail(), token));
         }
-        System.out.println("ISEMPTY");
+
         return ResponseEntity.badRequest().build();
+
+    }
+    @PostMapping("/a")
+    public ResponseEntity<String> aaa(){
+        System.out.println("aa");
+        return ResponseEntity.ok("aaa");
 
     }
 }
