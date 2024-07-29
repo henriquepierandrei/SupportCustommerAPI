@@ -1,7 +1,9 @@
 package com.API_SupportCustommer.API.infra.security;
 
-import lombok.RequiredArgsConstructor;
-
+import com.API_SupportCustommer.API.infra.security.CustomUserDetailsService;
+import com.API_SupportCustommer.API.infra.security.SecurityFilter;
+import jakarta.servlet.Filter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -17,10 +19,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
+
 public class SecurityConfig {
-    private final CustomUserDetailsService userDetailsService;
-    private final SecurityFilter securityFilter;
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
+
+    @Autowired
+    SecurityFilter securityFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -34,7 +39,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore((Filter) securityFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
@@ -46,6 +51,5 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
-
     }
 }
