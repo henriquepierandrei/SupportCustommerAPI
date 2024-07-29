@@ -3,6 +3,7 @@ package com.API_SupportCustommer.API.controllers;
 import com.API_SupportCustommer.API.dto.SupportDto;
 import com.API_SupportCustommer.API.model.SupportModel;
 import com.API_SupportCustommer.API.repository.SupportRepository;
+import com.API_SupportCustommer.API.service.SupportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ import java.util.Optional;
 @RequestMapping("/support")
 public class OpenSupportController {
     private final SupportRepository supportRepository;
-    private final Support
+    private final SupportService supportService;
 
 
     @PostMapping("/create")
@@ -29,7 +30,7 @@ public class OpenSupportController {
             newSupport.setTitle(supportDto.title());
             newSupport.setContent(supportDto.content());
             newSupport.setTypeOfProblem(supportDto.type());
-            newSupport.setTicket();
+            newSupport.setTicket(supportService.createTicket());
             this.supportRepository.save(newSupport);
             return ResponseEntity.ok("Support Created");
         }
