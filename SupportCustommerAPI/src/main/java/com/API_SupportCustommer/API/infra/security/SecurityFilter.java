@@ -21,12 +21,12 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class SecurityFilter {
+public class SecurityFilter extends OncePerRequestFilter{
     private final UserRepository userRepository;
     private final TokenService tokenService;
 
 
-//    @Override
+    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = this.recoverToken(request);
         var login = tokenService.validateToken(token);
@@ -55,5 +55,7 @@ public class SecurityFilter {
         if (authHeader == null) return null;
         return authHeader.replace("Bearer ", "");
     }
+
+
 }
 
