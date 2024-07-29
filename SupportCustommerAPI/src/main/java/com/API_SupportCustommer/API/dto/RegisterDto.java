@@ -1,4 +1,4 @@
 package com.API_SupportCustommer.API.dto;
 
-public record RegisterDto(String username, String email, String password) {
+public record RegisterDto(String name, String email, String password) {
 }
