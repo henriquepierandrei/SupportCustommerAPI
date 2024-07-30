@@ -108,6 +108,8 @@ public class AdminController {
 
     }
 
+
+    // Report about the supports
     @GetMapping("report/supports")
     public ResponseEntity getReportAboutTheSupports(){
         int quantityAllSupports = 0;
