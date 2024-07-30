@@ -2,7 +2,9 @@ package com.API_SupportCustommer.API.controllers;
 
 import com.API_SupportCustommer.API.enuns.StatusEnum;
 import com.API_SupportCustommer.API.model.SupportModel;
+import com.API_SupportCustommer.API.model.UserModel;
 import com.API_SupportCustommer.API.repository.SupportRepository;
+import com.API_SupportCustommer.API.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,14 @@ import java.util.Optional;
 @RequestMapping("/admin")
 public class AdminController {
     private final SupportRepository supportRepository;
+    private final UserRepository userRepository;
+
+    // List all Users
+    @GetMapping("/users")
+    public ResponseEntity<List<UserModel>> getAllUsers(){
+        List<UserModel> usersModelList = this.userRepository.findAll();
+        return ResponseEntity.ok(usersModelList);
+    }
 
     // List All Supports
     @GetMapping("/supports")
