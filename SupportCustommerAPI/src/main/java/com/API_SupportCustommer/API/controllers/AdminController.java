@@ -28,6 +28,18 @@ public class AdminController {
         return ResponseEntity.ok(usersModelList);
     }
 
+
+    @GetMapping("/users/{id}")
+    // View User by id
+    public ResponseEntity getUserById(@PathVariable(value = "id") long id){
+        Optional<UserModel> getUser = this.userRepository.findById(id);
+        if (getUser.isPresent()){
+            return ResponseEntity.ok(getUser.get());
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ID:"+id+" Isn't exists!");
+    }
+
+
     // List All Supports
     @GetMapping("/supports")
     public ResponseEntity<List<SupportModel>> getAllSupports(){
