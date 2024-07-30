@@ -4,5 +4,5 @@ public enum StatusEnum {
     UNREAD,
     IN_RESOLUCAO,
     UNRESOLVED,
-    RESOLVED;
+    RESOLVED
 }

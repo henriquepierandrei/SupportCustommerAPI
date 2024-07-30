@@ -2,6 +2,7 @@ package com.API_SupportCustommer.API.controllers;
 
 import com.API_SupportCustommer.API.dto.SupportDto;
 import com.API_SupportCustommer.API.enuns.StatusEnum;
+import com.API_SupportCustommer.API.enuns.TypeProblemStatus;
 import com.API_SupportCustommer.API.model.SupportModel;
 import com.API_SupportCustommer.API.model.UserModel;
 import com.API_SupportCustommer.API.repository.SupportRepository;
@@ -41,6 +42,7 @@ public class OpenSupportController {
         newSupport.setContent(supportDto.content());
         newSupport.setDateSupport(new Date());
         newSupport.setStatus(StatusEnum.UNREAD);
+        newSupport.setTypeProblemStatus(TypeProblemStatus.);
         newSupport.setTicket(ticket);
 
         user.setQuantityTickets(user.getQuantityTickets() + 1);
