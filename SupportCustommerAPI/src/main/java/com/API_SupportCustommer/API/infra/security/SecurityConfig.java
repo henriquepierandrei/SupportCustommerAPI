@@ -41,7 +41,7 @@ public class SecurityConfig {
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout
-                        .logoutUrl("/auth/logout") 
+                        .logoutUrl("/auth/logout")
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 );
