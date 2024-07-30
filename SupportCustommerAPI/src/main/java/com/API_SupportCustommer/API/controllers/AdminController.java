@@ -34,6 +34,10 @@ public class AdminController {
         return ResponseEntity.ok(supportModelList);
     }
 
+    // list supports by status
+    @GetMapping("/support/{status}")
+    public ResponseEntity getSupportByStatus
+
     // View support by ticket
     @GetMapping("/supports/{ticket}")
     public ResponseEntity gettSupportByTicket(@PathVariable(value = "ticket") String ticket){
