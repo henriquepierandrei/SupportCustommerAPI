@@ -14,4 +14,6 @@ public interface SupportRepository extends JpaRepository<SupportModel, UUID> {
     Optional<SupportModel> findByTicket(String ticket);
 
     List<SupportModel> findByStatus(StatusEnum statusEnum);
+
+
 }

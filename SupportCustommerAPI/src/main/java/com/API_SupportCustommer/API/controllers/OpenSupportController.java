@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -64,6 +65,29 @@ public class OpenSupportController {
 
         return ResponseEntity.ok("Support Created");
     }
+
+
+    @GetMapping("/find")
+    public ResponseEntity listSupportsByIdUser(@AuthenticationPrincipal UserModel userModel){
+        Optional<UserModel> usermodel = this.userRepository.findById(userModel.getId());
+        List<SupportModel> supportModelList = new ArrayList<>();
+        List<String> tickets = new ArrayList<>();
+        if (usermodel.isPresent()){
+            UserModel newUser = usermodel.get();
+            for (String ticket : newUser.getTicket()) {
+                tickets.add(ticket);
+            }
+            for (String ticket : tickets){
+                Optional<SupportModel> supportModelOptional = this.supportRepository.findByTicket(ticket);
+                if (supportModelOptional.isPresent()){
+                    supportModelList.add(supportModelOptional.get());
+
+                }
+            }
+        }
+        return ResponseEntity.status(HttpStatus.FOUND).body(supportModelList);
+    }
+
 
 
 
