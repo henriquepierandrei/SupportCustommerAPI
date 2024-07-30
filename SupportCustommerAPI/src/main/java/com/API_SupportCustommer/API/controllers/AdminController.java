@@ -90,21 +90,23 @@ public class AdminController {
     }
 
     @GetMapping("/supports/date/{date}")
-    public ResponseEntity getByTimeSupport(@PathVariable(value = "date") String date){
-        List<SupportModel> listSupportModel = this.supportRepository.findAll();
-        for (SupportModel supportModel : listSupportModel){
-            if (supportModel.getDateSupport().toString().contains(date)){
+    public ResponseEntity getByTimeSupport(@PathVariable(value = "date") String date) {
+        List<SupportModel> listSupportModel = new ArrayList<>();
+        List<SupportModel> allSupports = this.supportRepository.findAll();
 
+        for (SupportModel supportModel : allSupports) {
+            if (supportModel.getDateSupport().toString().contains(date)) {
                 listSupportModel.add(supportModel);
             }
         }
-        if (!listSupportModel.isEmpty()){
-            return ResponseEntity.status(HttpStatus.FOUND).body(listSupportModel);
 
+        if (!listSupportModel.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.FOUND).body(listSupportModel);
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.notFound().build();
 
     }
+
 
 
 
