@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,6 +88,24 @@ public class AdminController {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Support doesn't exist!");
     }
+
+    @GetMapping("/supports/date/{date}")
+    public ResponseEntity getByTimeSupport(@PathVariable(value = "date") String date){
+        List<SupportModel> listSupportModel = this.supportRepository.findAll();
+        for (SupportModel supportModel : listSupportModel){
+            if (supportModel.getDateSupport().toString().contains(date)){
+
+                listSupportModel.add(supportModel);
+            }
+        }
+        if (!listSupportModel.isEmpty()){
+            return ResponseEntity.status(HttpStatus.FOUND).body(listSupportModel);
+
+        }
+        return ResponseEntity.badRequest().build();
+
+    }
+
 
 
 }
