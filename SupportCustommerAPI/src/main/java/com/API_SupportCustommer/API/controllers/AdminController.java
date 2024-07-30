@@ -72,7 +72,7 @@ public class AdminController {
     }
 
 
-    // Update status
+    // Update status by ticket
     @PutMapping("/supports/ticket/{ticket}/status/{status}/update")
     public ResponseEntity<String> updateSupport(@PathVariable(value = "ticket") String ticket,
                                                 @PathVariable(value = "status") StatusEnum statusEnum) {
