@@ -29,8 +29,8 @@ public class AdminController {
     }
 
 
-    @GetMapping("/users/{id}")
     // View User by id
+    @GetMapping("/users/{id}")
     public ResponseEntity getUserById(@PathVariable(value = "id") long id){
         Optional<UserModel> getUser = this.userRepository.findById(id);
         if (getUser.isPresent()){

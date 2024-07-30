@@ -90,7 +90,6 @@ public class OpenSupportController {
 
 
 
-
     @PutMapping("/update/{ticket}")
     // Update Support
     public ResponseEntity updateSupport(@PathVariable(value = "ticket") String ticket, @RequestBody SupportDto supportDto, @AuthenticationPrincipal UserModel userModel){
