@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -25,6 +27,6 @@ public class UserModel {
 
     private int quantityTickets;
 
-    private String ticket;
+    private List<String> ticket;
 
 }
