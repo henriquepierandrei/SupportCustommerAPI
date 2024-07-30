@@ -89,6 +89,7 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Support doesn't exist!");
     }
 
+    // List supports by date
     @GetMapping("/supports/date/{date}")
     public ResponseEntity getByTimeSupport(@PathVariable(value = "date") String date) {
         List<SupportModel> listSupportModel = new ArrayList<>();
