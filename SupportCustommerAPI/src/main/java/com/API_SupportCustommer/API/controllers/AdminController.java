@@ -38,8 +38,20 @@ public class AdminController {
     }
 
 
-    // Update status of the support
     @PutMapping("/supports/{ticket}/{status}")
-    public ResponseEntity
+    public ResponseEntity<String> updateSupport(@PathVariable(value = "ticket") String ticket,
+                                                @PathVariable(value = "status") StatusEnum statusEnum) {
+        Optional<SupportModel> supportModelOpt = this.supportRepository.findByTicket(ticket);
+
+        if (supportModelOpt.isPresent()) {
+            SupportModel supportModel = supportModelOpt.get();
+            supportModel.setStatus(statusEnum);
+            supportRepository.save(supportModel);
+            return ResponseEntity.ok("Support updated successfully!");
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Support doesn't exist!");
+    }
+
 
 }
