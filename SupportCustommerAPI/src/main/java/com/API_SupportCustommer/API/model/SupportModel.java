@@ -24,6 +24,6 @@ public class SupportModel {
     private String title;
     private String ticket;
     private String content;
-    private StatusEnum typeOfProblem;
+    private StatusEnum status;
     private Date dateSupport;
 }
