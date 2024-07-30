@@ -8,6 +8,7 @@ import com.API_SupportCustommer.API.repository.SupportRepository;
 import com.API_SupportCustommer.API.repository.UserRepository;
 import com.API_SupportCustommer.API.service.SupportService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +50,10 @@ public class OpenSupportController {
 
         user.setQuantityTickets(user.getQuantityTickets() + 1);
 
+        int quantity = user.getQuantityTickets();
+        if (quantity > 3){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Exceeded the support limit (3)!");
+        }
         List<String> tickets = user.getTicket();
         tickets.add(ticket);
         user.setTicket(tickets);
