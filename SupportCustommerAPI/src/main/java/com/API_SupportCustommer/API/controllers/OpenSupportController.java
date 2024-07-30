@@ -93,20 +93,28 @@ public class OpenSupportController {
 
     @PutMapping("/update/{ticket}")
     // Update Support
-    public ResponseEntity updateSupport(@PathVariable(value = "ticket") String ticket, @RequestBody SupportDto supportDto){
-        Optional<SupportModel> existingSupport = this.supportRepository.findByTicket(ticket);
-        String status = existingSupport.get().getStatus().toString();
-        if (existingSupport.isPresent()){
-            SupportModel supportModel = existingSupport.get();
-            supportModel.setStatus(supportDto.status());
-            supportModel.setTitle(supportDto.title());
-            supportModel.setContent(supportDto.content());
-            supportModel.setTypeProblemEnum(supportDto.type());
-            supportModel.setStatus(StatusEnum.valueOf(status));
-            this.supportRepository.save(supportModel);
-            return ResponseEntity.ok("Update successfully!");
+    public ResponseEntity updateSupport(@PathVariable(value = "ticket") String ticket, @RequestBody SupportDto supportDto, @AuthenticationPrincipal UserModel userModel){
+        List<String> ticketsUser = userModel.getTicket();
+
+        for (String ticket2 : ticketsUser){
+            if (ticket2.equals(ticket)){
+                Optional<SupportModel> existingSupport = this.supportRepository.findByTicket(ticket);
+                String status = existingSupport.get().getStatus().toString();
+                if (existingSupport.isPresent()){
+                    SupportModel supportModel = existingSupport.get();
+                    supportModel.setStatus(supportDto.status());
+                    supportModel.setTitle(supportDto.title());
+                    supportModel.setContent(supportDto.content());
+                    supportModel.setTypeProblemEnum(supportDto.type());
+                    supportModel.setStatus(StatusEnum.valueOf(status));
+                    this.supportRepository.save(supportModel);
+                    return ResponseEntity.ok("Update successfully!");
+                }
+                return ResponseEntity.badRequest().build();
+            }
         }
-        return ResponseEntity.badRequest().build();
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Isn't exists!");
     }
 
 
