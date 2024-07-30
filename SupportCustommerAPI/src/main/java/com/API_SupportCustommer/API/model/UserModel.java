@@ -1,11 +1,9 @@
 package com.API_SupportCustommer.API.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -27,6 +25,8 @@ public class UserModel {
 
     private int quantityTickets;
 
-    private List<String> ticket;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> ticket = new ArrayList<>();
+
 
 }

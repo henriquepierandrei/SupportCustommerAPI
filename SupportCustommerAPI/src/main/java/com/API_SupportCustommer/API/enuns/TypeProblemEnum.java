@@ -1,6 +1,6 @@
 package com.API_SupportCustommer.API.enuns;
 
-public enum TypeProblemStatus {
+public enum TypeProblemEnum {
     TECHNICAL_ISSUES,
     ACCOUNT_AND_ACCESS_PROBLEMS,
     PRODUCT_AND_SERVICE_ISSUES,

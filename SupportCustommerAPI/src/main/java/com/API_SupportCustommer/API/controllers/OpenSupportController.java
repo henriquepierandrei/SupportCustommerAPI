@@ -2,7 +2,6 @@ package com.API_SupportCustommer.API.controllers;
 
 import com.API_SupportCustommer.API.dto.SupportDto;
 import com.API_SupportCustommer.API.enuns.StatusEnum;
-import com.API_SupportCustommer.API.enuns.TypeProblemStatus;
 import com.API_SupportCustommer.API.model.SupportModel;
 import com.API_SupportCustommer.API.model.UserModel;
 import com.API_SupportCustommer.API.repository.SupportRepository;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -46,7 +44,7 @@ public class OpenSupportController {
         newSupport.setContent(supportDto.content());
         newSupport.setDateSupport(new Date());
         newSupport.setStatus(StatusEnum.UNREAD);
-        newSupport.setTypeProblemStatus(supportDto.typeProblemStatus());
+        newSupport.setTypeProblemEnum(supportDto.type());
         newSupport.setTicket(ticket);
 
         user.setQuantityTickets(user.getQuantityTickets() + 1);

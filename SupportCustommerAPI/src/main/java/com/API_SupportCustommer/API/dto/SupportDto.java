@@ -1,8 +1,7 @@
 package com.API_SupportCustommer.API.dto;
 
 import com.API_SupportCustommer.API.enuns.StatusEnum;
-import com.API_SupportCustommer.API.enuns.TypeProblemStatus;
+import com.API_SupportCustommer.API.enuns.TypeProblemEnum;
 
-import java.util.Date;
-public record SupportDto(String title, StatusEnum status, String content, TypeProblemStatus typeProblemStatus) {
+public record SupportDto(String title, StatusEnum status, String content, TypeProblemEnum type) {
 }
