@@ -1,5 +1,6 @@
 package com.API_SupportCustommer.API.model;
 
+import com.API_SupportCustommer.API.enuns.StatusEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +24,6 @@ public class SupportModel {
     private String title;
     private String ticket;
     private String content;
-    private String typeOfProblem;
+    private StatusEnum typeOfProblem;
     private Date dateSupport;
 }
