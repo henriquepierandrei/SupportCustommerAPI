@@ -7,6 +7,7 @@
     <list default="true" id="70adc911-b0b6-46f8-9934-94f6b5d5ce7f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SupportCustommerAPI/src/main/java/com/API_SupportCustommer/API/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SupportCustommerAPI/src/main/java/com/API_SupportCustommer/API/controllers/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SupportCustommerAPI/src/main/java/com/API_SupportCustommer/API/repository/SupportRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/SupportCustommerAPI/src/main/java/com/API_SupportCustommer/API/repository/SupportRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

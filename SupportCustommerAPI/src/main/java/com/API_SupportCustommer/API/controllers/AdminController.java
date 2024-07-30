@@ -1,5 +1,6 @@
 package com.API_SupportCustommer.API.controllers;
 
+import ch.qos.logback.core.pattern.util.RegularEscapeUtil;
 import com.API_SupportCustommer.API.enuns.StatusEnum;
 import com.API_SupportCustommer.API.model.SupportModel;
 import com.API_SupportCustommer.API.model.UserModel;
@@ -35,11 +36,18 @@ public class AdminController {
     }
 
     // list supports by status
-    @GetMapping("/support/{status}")
-    public ResponseEntity getSupportByStatus
+    @GetMapping("/supports/status/{status}")
+    public ResponseEntity getSupportByStatus(@PathVariable(value = "status") StatusEnum statusEnum){
+        List<SupportModel> listSupport = this.supportRepository.findByStatus(statusEnum);
+        if (listSupport.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Isn't exists!");
+        }
+        return ResponseEntity.ok(listSupport);
+
+    }
 
     // View support by ticket
-    @GetMapping("/supports/{ticket}")
+    @GetMapping("/supports/ticket/{ticket}")
     public ResponseEntity gettSupportByTicket(@PathVariable(value = "ticket") String ticket){
         Optional<SupportModel> supportModelupport = this.supportRepository.findByTicket(ticket);
         if (!supportModelupport.isEmpty()){
@@ -53,7 +61,7 @@ public class AdminController {
 
 
     // Update status
-    @PutMapping("/supports/{ticket}/{status}")
+    @PutMapping("/supports/ticket/{ticket}/status/{status}/update")
     public ResponseEntity<String> updateSupport(@PathVariable(value = "ticket") String ticket,
                                                 @PathVariable(value = "status") StatusEnum statusEnum) {
         Optional<SupportModel> supportModelOpt = this.supportRepository.findByTicket(ticket);
