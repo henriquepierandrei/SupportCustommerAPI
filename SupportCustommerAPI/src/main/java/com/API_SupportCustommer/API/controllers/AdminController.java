@@ -48,6 +48,7 @@ public class AdminController {
         return ResponseEntity.ok(supportModelList);
     }
 
+    
     // list supports by status
     @GetMapping("/supports/status/{status}")
     public ResponseEntity getSupportByStatus(@PathVariable(value = "status") StatusEnum statusEnum){
@@ -58,6 +59,7 @@ public class AdminController {
         return ResponseEntity.ok(listSupport);
 
     }
+
 
     // View support by ticket
     @GetMapping("/supports/ticket/{ticket}")
