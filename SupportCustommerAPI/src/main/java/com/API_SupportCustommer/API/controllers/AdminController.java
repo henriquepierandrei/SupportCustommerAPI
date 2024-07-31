@@ -48,7 +48,7 @@ public class AdminController {
         return ResponseEntity.ok(supportModelList);
     }
 
-    
+
     // list supports by status
     @GetMapping("/supports/status/{status}")
     public ResponseEntity getSupportByStatus(@PathVariable(value = "status") StatusEnum statusEnum){
