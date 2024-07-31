@@ -117,6 +117,30 @@ public class OpenSupportController {
     }
 
 
+    // Delete support for the user
+    @DeleteMapping("/delete/{ticket}")
+    public ResponseEntity deleteSupport(@PathVariable(value = "ticket") String ticket, @AuthenticationPrincipal UserModel userModel){
+        Optional<SupportModel> supportModelOptional = this.supportRepository.findByTicket(ticket);
+
+        if (userModel.getTicket().toString().contains(ticket) && supportModelOptional.isPresent()){
+            this.supportRepository.delete(supportModelOptional.get());
+            userModel.setQuantityTickets(userModel.getQuantityTickets()-1);
+
+
+            List<String> tickets = userModel.getTicket();
+            for (int i = 0; i < tickets.size(); i++){
+                if (tickets.get(i).contains(ticket)){
+                    tickets.remove(i);
+                }
+            }
+            userModel.setTicket(tickets);
+            this.userRepository.save(userModel);
+            
+            return ResponseEntity.ok("Deleted");
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ticket Not Found!");
+    }
 
 
 }
