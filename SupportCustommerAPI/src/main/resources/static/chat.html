@@ -1,44 +1,59 @@
-<!-- src/main/resources/static/chat.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
-    <script>
-        let socket;
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Chat WebSocket</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<ul id="messages-list"></ul>-->
+<!--<input id="user" type="text" placeholder="Seu nome">-->
+<!--<input id="content" type="text" placeholder="Sua mensagem">-->
+<!--<button onclick="sendMessage()">Enviar</button>-->
 
-        function connect() {
-            socket = new WebSocket('ws://localhost:8080/ws/chat');
-            socket.onmessage = function(event) {
-                let messagesList = document.getElementById('messages-list');
-                let message = document.createElement('li');
-                message.textContent = event.data;
-                messagesList.appendChild(message);
-            };
-        }
+<!--<script>-->
+<!--    let socket;-->
 
-        function sendMessage() {
-            let user = document.getElementById('user').value;
-            let content = document.getElementById('content').value;
-            socket.send(user + ":" + content);
-            document.getElementById('content').value = '';
-        }
+<!--    function connectWebSocket() {-->
+<!--        socket = new WebSocket('ws://localhost:8080/ws/chat');-->
 
-        window.onload = function() {
-            connect();
-        };
-    </script>
-</head>
-<body>
-<h1>Chat</h1>
-<form onsubmit="sendMessage(); return false;">
-    <label for="user">User:</label>
-    <input type="text" id="user" required>
-    <label for="content">Message:</label>
-    <input type="text" id="content" required>
-    <button type="submit">Send</button>
-</form>
-<ul id="messages-list"></ul>
-</body>
-</html>
+<!--        socket.onopen = function() {-->
+<!--            console.log('Conectado ao WebSocket');-->
+<!--        };-->
+
+<!--        socket.onmessage = function(event) {-->
+<!--            let messagesList = document.getElementById('messages-list');-->
+<!--            let message = document.createElement('li');-->
+<!--            message.textContent = event.data;-->
+<!--            messagesList.appendChild(message);-->
+<!--        };-->
+
+<!--        socket.onclose = function() {-->
+<!--            console.log('Desconectado do WebSocket, tentando reconectar...');-->
+<!--            setTimeout(connectWebSocket, 5000); // Tenta reconectar após 5 segundos-->
+<!--        };-->
+
+<!--        socket.onerror = function(error) {-->
+<!--            console.error('Erro no WebSocket:', error);-->
+<!--        };-->
+<!--    }-->
+
+<!--    window.onload = function() {-->
+<!--        connectWebSocket();-->
+<!--    };-->
+
+<!--    function sendMessage() {-->
+<!--        let user = document.getElementById('user').value;-->
+<!--        let content = document.getElementById('content').value;-->
+<!--        if (user && content) {-->
+<!--            if (socket.readyState === WebSocket.OPEN) {-->
+<!--                socket.send(user + ": " + content);-->
+<!--                document.getElementById('content').value = '';-->
+<!--            } else {-->
+<!--                console.error('WebSocket não está aberto. Estado atual:', socket.readyState);-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
