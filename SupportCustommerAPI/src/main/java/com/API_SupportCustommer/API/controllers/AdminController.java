@@ -12,9 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -131,27 +129,59 @@ public class AdminController {
     }
 
 
-    // Report about the supports
     @GetMapping("report/supports")
-    public ResponseEntity getReportAboutTheSupports(){
-        int quantityAllSupports = 0;
-        int quantityUNREAD = 0;
-        int quantityINRESOLUTION = 0;
-        int quantityUNRESOLVED = 0;
-        int quantityRESOLVED = 0;
+    public ResponseEntity<String> getReportAboutTheSupports() {
+        // Inicializa os contadores
+        Map<String, Integer> statusCounts = new HashMap<>();
+        Map<String, Integer> typeCounts = new HashMap<>();
 
-        List<SupportModel> supportModelList = this.supportRepository.findAll();
-        for (SupportModel supportModel : supportModelList){
-            if (supportModel.getStatus().toString().contains("UNREAD")){quantityUNREAD++;}
-            if (supportModel.getStatus().toString().contains("INRESOLUCAO")){quantityINRESOLUTION++;}
-            if (supportModel.getStatus().toString().contains("UNRESOLVED")){quantityUNRESOLVED++;}
-            if (supportModel.getStatus().toString().contains("RESOLVED")){quantityRESOLVED++;}
-            quantityAllSupports++;
+        // Define todos os status e tipos possíveis
+        List<String> statuses = Arrays.asList("UNREAD", "INRESOLUTION", "UNRESOLVED", "RESOLVED");
+        List<String> types = Arrays.asList("TECHNICAL_ISSUES", "ACCOUNT_AND_ACCESS_PROBLEMS", "PRODUCT_AND_SERVICE_ISSUES",
+                "BILLING_AND_PAYMENT_PROBLEMS", "CUSTOMER_SERVICE_ISSUES", "USABILITY_PROBLEMS",
+                "SECURITY_ISSUES", "FUNCTIONALITY_PROBLEMS");
+
+        // Inicializa os contadores para cada status e tipo
+        for (String status : statuses) {
+            statusCounts.put(status, 0);
         }
-        return ResponseEntity.ok("Quantity Supports: "+quantityAllSupports+"\nQuantity Supports UNREAD: "+quantityUNREAD+"\n" +
-                "Quantity Supports INRESOLUTION: "+quantityINRESOLUTION+"\nQuantity Supports UNRESOLVED: "+quantityUNRESOLVED+"\n" +
-                "Quantity Supports RESOLVED: "+quantityRESOLVED);
+        for (String type : types) {
+            typeCounts.put(type, 0);
+        }
+
+        // Conta os suportes
+        List<SupportModel> supportModelList = this.supportRepository.findAll();
+
+        for (SupportModel supportModel : supportModelList) {
+            String status = supportModel.getStatus().toString();
+            String type = supportModel.getTypeProblemEnum().toString();
+
+            // Incrementa o contador para o status se ele existir
+            if (statusCounts.containsKey(status)) {
+                statusCounts.put(status, statusCounts.get(status) + 1);
+            }
+
+            // Incrementa o contador para o tipo se ele existir
+            if (typeCounts.containsKey(type)) {
+                typeCounts.put(type, typeCounts.get(type) + 1);
+            }
+        }
+
+        // Gera o relatório
+        StringBuilder report = new StringBuilder();
+        report.append("Quantity Supports: ").append(supportModelList.size()).append("\n");
+
+        for (String status : statuses) {
+            report.append("Quantity Supports ").append(status).append(": ").append(statusCounts.get(status)).append("\n");
+        }
+
+        for (String type : types) {
+            report.append("Quantity Problem ").append(type).append(": ").append(typeCounts.get(type)).append("\n");
+        }
+
+        return ResponseEntity.ok(report.toString());
     }
+
 
 
     // View all type of problems
