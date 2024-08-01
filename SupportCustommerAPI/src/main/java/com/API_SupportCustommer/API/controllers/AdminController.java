@@ -129,6 +129,7 @@ public class AdminController {
     }
 
 
+    // Report about supports
     @GetMapping("report/supports")
     public ResponseEntity<String> getReportAboutTheSupports() {
         // Inicializa os contadores
