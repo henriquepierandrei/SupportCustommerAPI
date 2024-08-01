@@ -2,6 +2,7 @@ package com.API_SupportCustommer.API.controllers;
 
 import ch.qos.logback.core.pattern.util.RegularEscapeUtil;
 import com.API_SupportCustommer.API.enuns.StatusEnum;
+import com.API_SupportCustommer.API.enuns.TypeProblemEnum;
 import com.API_SupportCustommer.API.model.SupportModel;
 import com.API_SupportCustommer.API.model.UserModel;
 import com.API_SupportCustommer.API.repository.SupportRepository;
@@ -109,6 +110,25 @@ public class AdminController {
         return ResponseEntity.notFound().build();
 
     }
+
+
+    @GetMapping("/supports/problem/{problem}")
+    public ResponseEntity<?> getByProblem(@PathVariable(value = "problem") String problem) {
+        TypeProblemEnum typeProblemEnum;
+        try {
+            typeProblemEnum = TypeProblemEnum.valueOf(problem.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problem + " isn't a valid problem type.");
+        }
+
+        List<SupportModel> supportModelList = this.supportRepository.findByTypeProblemEnum(typeProblemEnum);
+        if (!supportModelList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.FOUND).body(supportModelList);
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No supports found for the problem type: " + typeProblemEnum);
+    }
+
 
 
     // Report about the supports

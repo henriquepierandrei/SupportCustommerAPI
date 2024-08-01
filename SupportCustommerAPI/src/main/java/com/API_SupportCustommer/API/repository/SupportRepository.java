@@ -1,6 +1,7 @@
 package com.API_SupportCustommer.API.repository;
 
 import com.API_SupportCustommer.API.enuns.StatusEnum;
+import com.API_SupportCustommer.API.enuns.TypeProblemEnum;
 import com.API_SupportCustommer.API.model.SupportModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,5 @@ public interface SupportRepository extends JpaRepository<SupportModel, UUID> {
     List<SupportModel> findByStatus(StatusEnum statusEnum);
 
 
+    List<SupportModel> findByTypeProblemEnum(TypeProblemEnum typeProblemEnum);
 }
