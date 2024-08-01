@@ -112,6 +112,7 @@ public class AdminController {
     }
 
 
+    // Listed supports by type problem
     @GetMapping("/supports/problem/{problem}")
     public ResponseEntity<?> getByProblem(@PathVariable(value = "problem") String problem) {
         TypeProblemEnum typeProblemEnum;
@@ -128,7 +129,6 @@ public class AdminController {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No supports found for the problem type: " + typeProblemEnum);
     }
-
 
 
     // Report about the supports
@@ -151,6 +151,13 @@ public class AdminController {
         return ResponseEntity.ok("Quantity Supports: "+quantityAllSupports+"\nQuantity Supports UNREAD: "+quantityUNREAD+"\n" +
                 "Quantity Supports INRESOLUTION: "+quantityINRESOLUTION+"\nQuantity Supports UNRESOLVED: "+quantityUNRESOLVED+"\n" +
                 "Quantity Supports RESOLVED: "+quantityRESOLVED);
+    }
+
+
+    // View all type of problems
+    @GetMapping("/supports/problem/view")
+    public ResponseEntity getAllProblems(){
+        return ResponseEntity.status(HttpStatus.FOUND).body(TypeProblemEnum.values());
     }
 
 
